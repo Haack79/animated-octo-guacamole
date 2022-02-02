@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 export const NavigationBar = styled.nav`
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
+    color: dodgerblue;
     background-color: #FAEBD7;
 `
 export const NavBar = () => {
