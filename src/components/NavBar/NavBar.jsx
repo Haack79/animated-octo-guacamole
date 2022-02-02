@@ -1,19 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom'; 
 import styled from 'styled-components';
-const navBar = styled.nav`
+export const NavigationBar = styled.nav`
     display: flex;
     justify-content: flex-start;
     background-color: #FAEBD7;
 `
 export const NavBar = () => {
     const pages = ['home', 'profile', 'view', 'connect'];
-    const navBarLinks = pages.map((page, _, indx) => {
+    const navBarLinks = pages.map((page, indx) => {
         return (
-            <navBar>
-                <Link key={page+indx} to={'/'+page}>{page.toUpperCase()+' '}</Link>
-            </navBar>
+            <Link key={indx} to={'/'+page}>{page.toUpperCase()+' '}</Link>
         )
     });
-    return navBarLinks; 
+    return <NavigationBar>{navBarLinks}</NavigationBar>; 
 }

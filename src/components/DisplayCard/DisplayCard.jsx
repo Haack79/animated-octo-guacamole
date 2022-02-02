@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-const DisplayCard = () => {
+export const DisplayCard = () => {
     return (
         <>
             <section>
