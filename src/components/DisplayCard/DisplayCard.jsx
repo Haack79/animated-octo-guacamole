@@ -7,7 +7,7 @@ export const DisplayCard = () => {
                 <h1>Title</h1>
                 <video></video>
                 <p>text here</p>
-                <p class="comments">comments here</p>
+                <p className="comments">comments here</p>
             </section>
         </>
     )
