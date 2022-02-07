@@ -1,4 +1,5 @@
-const getNotes = require('./notes.js');
+const yargs = require('yargs'); 
+const notes = require('./notes.js');
 // const name = require('./practice-file.js'); 
 console.log('hello there'); 
 // load in the fs module into variable. 
@@ -7,6 +8,57 @@ console.log('hello there');
 // fs.writeFileSync('notes.txt', ' this file was created by node.js'); 
 // fs.appendFileSync('notes.txt', 'hello im appended'); 
 // const speak = getNotes(); 
-getNotes(); 
-// console.log(speak); 
-// console.log(name); 
+// getting arguments from the terminal cli - argv is an array with all the arguments passed in.
+// console.log(process.argv);
+// first 2 elements in array are file info and url, 3rd will be where argument you put into cli is to be used.
+// can add title in cli with - node notes.js add --title="this is my title" -
+// this will cause argv to now have 4 elements in the array, the 3rd at indx 2 will be add, and 4th at indx 3 
+// will be --title=This is my title -- 
+//-- so need a parser to parse the string or could write the code yourself but theres a package for it.
+// Yargs - great package - pirate themed - to parse strings
+//yargs will parse out the title -- can add commands to it
+const log = console.log; 
+// Create add command with yargs 
+yargs.command({
+    command: 'add', 
+    describe: 'add a new note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true, // this makes it required.
+            type: 'string'
+        },
+        body: {
+            describe: 'adding body info',
+            demandOption: true,
+            type: 'string' 
+        }
+    },
+    handler: function (argv) {
+        notes.addNote(argv.title, argv.body); 
+    }
+});
+
+yargs.command({
+    command: 'remove',
+    describe: 'removing note',
+    handler: function() {
+        console.log('removed note'); 
+    }
+})
+yargs.command({
+    command: 'list',
+    describe: 'listing notes',
+    handler: function() {
+        log('listing notes here');
+    }
+});
+yargs.command({
+    command: 'read',
+    describe: 'reading notesssss',
+    handler: function() {
+        log('reading notes and help');
+    }
+})
+// console.log(yargs.argv);
+yargs.parse(); 
