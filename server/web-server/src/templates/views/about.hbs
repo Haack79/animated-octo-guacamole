@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="https://f.v1.n0.cdn.getcloudapp.com/items/1J0Y1N1I441v1E2k3e2W/weather.png">
     <script src="/js/app.js"></script> 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,13 @@
     <title>About</title>
 </head>
 <body>
-    {{>header }}
-    <h1>About me yo</h1>
-    <img class="portrait" src="/img/me.png">
-    <p>{{name}} and age {{age}}</p>
+    <div class="main-content">
+        {{>header }}
+        <h1>About me yo</h1>
+        <img class="portrait" src="/img/me.png">
+        <p>{{name}} and age {{age}}</p>
+
+    </div>
     {{>footer}}
 </body>
 </html>

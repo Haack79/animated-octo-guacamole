@@ -1,5 +1,7 @@
 const path = require('path'); // core node module so dont have to install it. 
 const express = require('express'); 
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 // get hbs to set up partials. 
 const hbs = require('hbs');
 
@@ -71,9 +73,37 @@ app.get('/help/*', (req, res) => {
     })
 })
 app.get('/weather', (req, res) => {
+    if (!req.query.search) {
+        return res.send({
+            error: 'You need to provide a search term'
+        })
+    }
+    const address = req.query.address; 
+    debugger;
+    if (!address) {
+        return res.send({
+            error: 'You must put in an address'
+        })
+    }
+    geocode(address, (error, {latitude, longitude, location} = {}) => {
+        if (error) {
+            return res.send({error});
+        }
+        forecast(latitude, longitude, (err, forecastData) => {
+            if (err) {
+                return res.send({err}); 
+            }
+            res.send({
+                forecast: forecastData,
+                location,
+                address: address
+            })
+        })
+    })
+});
+app.get('/products', (req, res) => {
     res.send({
-        name: 'Brian H',
-        age: 100
+        stuff: 'lotta goodies bro'
     })
 })
 app.get('*', (req, res) => {
