@@ -4,6 +4,7 @@ const mapAPI = 'pk.eyJ1IjoiaGFhY2s3OSIsImEiOiJjajVteHlkbzIzOGw5MzJvNngxbm9pZHllI
 const endPoint = 'mapbox.places';
 
 const geocode = (address, callback) => {
+    console.log(address); 
     const url = `https://api.mapbox.com/geocoding/v5/${endPoint}/${encodeURIComponent(address)}.json?access_token=${mapAPI}?limit=1`;
     request({url: url, json: true }, (err, {body}) => {
         if (err) {
@@ -18,6 +19,6 @@ const geocode = (address, callback) => {
             })
         }
     })
-}
+};
 
 module.exports = geocode; 
