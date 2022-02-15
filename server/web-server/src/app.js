@@ -72,20 +72,28 @@ app.get('/help/*', (req, res) => {
         title: 'big boo boo'
     })
 })
+console.log('about to get weather request');
 app.get('/weather', (req, res) => {
-    if (!req.query.address) {
+    const address = req.query.address; 
+    console.log(req.query.address);
+    console.log(address);  
+    if (!address) {
         return res.send({
             error: 'You must put in an address'
         })
     }
-    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
+    geocode(address, (error, {latitude, longitude, location} = {}) => {
+        console.log(latitude, longitude, location);
         if (error) {
             return res.send({error});
         }
-        forecast(latitude, longitude, (err, forecastData) => {
-            if (err) {
-                return res.send({err}); 
+        console.log('going to call forecast');
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error) {
+                console.log('there was an error'); 
+                return res.send({error}); 
             }
+            console.log('in forecast in app.js', latitude, longitude, location); 
             res.send({
                 forecast: forecastData,
                 location,
