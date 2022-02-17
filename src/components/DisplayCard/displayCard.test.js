@@ -5,6 +5,7 @@ import {render, screen} from '@testing-library/react';
 describe('DisplayCard', () => {
     test('renders DisplayCard', () => {
         render(<DisplayCard />);
+        
         screen.debug();
     });
 });

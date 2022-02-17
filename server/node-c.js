@@ -1,4 +1,5 @@
 const yargs = require('yargs'); 
+const chalk = require('chalk');
 const notes = require('./notes.js');
 // const name = require('./practice-file.js'); 
 console.log('hello there'); 
@@ -34,7 +35,7 @@ yargs.command({
             type: 'string' 
         }
     },
-    handler: function (argv) {
+    handler(argv) {
         notes.addNote(argv.title, argv.body); 
     }
 });
@@ -42,22 +43,43 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'removing note',
-    handler: function() {
-        console.log('removed note'); 
+    builder: {
+        title: {
+            describe: 'taking out note',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.removeNote(argv.title); 
+        console.log(chalk.green('removed note'), argv.title); 
     }
-})
+});
 yargs.command({
     command: 'list',
     describe: 'listing notes',
-    handler: function() {
-        log('listing notes here');
+    builder: {
+        title: {
+            describe: 'listing notes out',
+        }
+    },
+    handler() {
+        log(chalk.green('heres the list'));
+        console.log(notes.listNotes());
     }
 });
 yargs.command({
     command: 'read',
     describe: 'reading notesssss',
-    handler: function() {
-        log('reading notes and help');
+    builder: {
+        title: {
+            describe: 'reading specific note',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title);
     }
 })
 // console.log(yargs.argv);

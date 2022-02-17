@@ -6,14 +6,21 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "chalk": "^2.4.1",
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
     "jest": "^27.4.7",
+    "mongodb": "^3.1.10",
+    "postman-request": "^2.88.1-postman.31",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.4"
+    "validator": "^10.8.0",
+    "web-vitals": "^2.1.4",
+    "yargs": "^12.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

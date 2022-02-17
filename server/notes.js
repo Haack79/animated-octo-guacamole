@@ -9,27 +9,27 @@ log(chalk.blue('Hello') + 'World' + chalk.red('!'));
 log(chalk.green('success')); 
 const yellow = chalk.yellow('caution');
 log(yellow); 
- 
-const getNotes = () =>  {
-    console.log('hello from the notes.js');
-}
+ // to debug can add debugger keyword - then in cli run  node inspect <filename>
+ // then chrome://inspect - can inspect app. 
 const addNote = function(title, body) {
     const notes = loadNotes(); 
-    const duplicateNotes = notes.filter((note) => {
-        return note.title === title; 
-    });
-    if (duplicateNotes.length === 0) {
-        log('new note taken'); 
+    // const duplicateNotes = notes.filter((note) => {
+    //     return note.title === title; 
+    // });
+    debugger
+    const duplicateNote = notes.find(note => note.title === title)
+    if (!duplicateNote) {
+        log(chalk.green.inverse('new note taken')); 
         notes.push({
             title: title,
             body: body
         });
         saveNotes(notes);
     } else {
-        log('Note title taken');
+        log(chalk.red('Note title already used'));
     }
 }
-const saveNotes = function(notes) {
+const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes); 
     fs.writeFileSync('notes.json', dataJSON); 
 }
@@ -43,6 +43,43 @@ const loadNotes = function() {
         return []; 
     }
 }
+const removeNote = (title) => {
+    const notes = loadNotes();
+    const originalLength = notes.length; 
+    const newNotes = notes.filter(note => {
+        return note.title !== title; 
+    });
+    saveNotes(newNotes);
+    if (originalLength > newNotes.length) {
+        log(chalk.green.inverse('note removed'));
+    } else {
+        log(chalk.red('note does not exist')); 
+    }
+}
+const listNotes = () => {
+    const notes = loadNotes(); 
+    console.log(notes);
+    if (notes.length) {
+        console.log(notes.length);
+        const names = notes.map(note => note.title);
+        return names;
+
+    } else {
+        console.log(chalk.red('no notes to list'));
+    }
+}
+
+const readNote = (title) => {
+    const notes = loadNotes();
+    const note = notes.find(note => note.title === title);
+    if (note) {
+        log(chalk.green('Found Note!'));
+        log(note.title); 
+        log(note.body); 
+    } else {
+        log(chalk.red.inverse('Sorry note with that title not found!'))
+    }
+}
 // getting arguments from the terminal cli - argv is an array with all the arguments passed in.
 // console.log(process.argv);
 // first 2 elements in array are file info and url, 3rd will be where argument you put into cli is to be used.
@@ -53,55 +90,12 @@ const loadNotes = function() {
 // Yargs - great package - pirate themed - to parse strings
 //yargs will parse out the title -- can add commands to it
 
-// Create add command with yargs 
-// yargs.command({
-//     command: 'add', 
-//     describe: 'add a new note',
-//     builder: {
-//         title: {
-//             describe: 'Note title',
-//             demandOption: true, // this makes it required.
-//             type: 'string'
-//         },
-//         body: {
-//             describe: 'adding body info',
-//             demandOption: true,
-//             type: 'string' 
-//         }
-//     },
-//     handler: function (argv) {
-//         log('adding a new note!'+argv.title);
-//         log('Body time'+argv.body);  
-//     }
-// });
-
-// yargs.command({
-//     command: 'remove',
-//     describe: 'removing note',
-//     handler: function() {
-//         console.log('removed note'); 
-//     }
-// })
-// yargs.command({
-//     command: 'list',
-//     describe: 'listing notes',
-//     handler: function() {
-//         log('listing notes here');
-//     }
-// });
-// yargs.command({
-//     command: 'read',
-//     describe: 'reading notesssss',
-//     handler: function() {
-//         log('reading notes and help');
-//     }
-// })
-// console.log(yargs.argv);
-// yargs.parse(); 
 // checking email and url below with validator
 // console.log(validator.isEmail('brian@e.com')); 
 // console.log(validator.isURL('bleh')); 
 module.exports = {
-    getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote,
+    listNotes: listNotes,
+    readNote: readNote
 } 

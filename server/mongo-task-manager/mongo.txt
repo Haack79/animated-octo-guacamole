@@ -1,0 +1,26 @@
+this is the path name i run in the terminal to get server to place data in a folder 
+$ /Users/brianhaack/mongodb/bin/mongod --dbpath=/Users/brianhaack/mongodb-data
+basically it is 
+/path to fold witht he downloaded mongod to run server --dbpath=path to folder we made to hold the data
+
+
+next is to use db admin tool , tool to work with the data a lot easier 
+there are a few but popular is robomongo 3t and mongochef 
+- they help with data visualization and see what data is getting read and written 
+
+download install run robomongo3t
+create a new db connection
+right click to go to shell and run a command against mongodb 
+
+can check version with db.version() and hit green arrow
+
+connect and insert documents. 
+connect from Node. use node db driver
+=====
+
+go to mongodb doc and look up drivers
+DRIVERS let you interact with mongo db database from a wide range of programming languages 
+
+install npm i mongodb to work with node
+
+open new terminal window, since db needs to be running to be connected
