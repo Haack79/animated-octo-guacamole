@@ -24,3 +24,4 @@ DRIVERS let you interact with mongo db database from a wide range of programming
 install npm i mongodb to work with node
 
 open new terminal window, since db needs to be running to be connected
+to connect server to db  node mongodb.js - run server. 
