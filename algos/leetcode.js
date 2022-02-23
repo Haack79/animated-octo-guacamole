@@ -33,7 +33,7 @@ var twoSumHash = function(nums, target) {
     return null; 
 };
 
-console.log(twoSumHash(numsArr, total)); 
+// console.log(twoSumHash(numsArr, total)); 
 
 // find duplicates in an array; 
 var containsDuplicate = function(nums) {
@@ -49,3 +49,18 @@ var containsDuplicate = function(nums) {
     return false; 
 };
 // console.log(containsDuplicate([1,2,3,1]))
+
+// find missing number 
+// [3,0,1] missing num is 2
+var missingNumber = function(nums) {
+    let total = 0;
+    let arrTotal = 0; 
+   for (let i = 1; i<nums.length; i++) {
+        total += i;
+        arrTotal += nums[i-1]; 
+   }
+   return (total + nums.length + 1) - arrTotal; 
+
+};
+// console.log(missingNumber([3,0,1]));
+
