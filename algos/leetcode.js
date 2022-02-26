@@ -64,3 +64,11 @@ var missingNumber = function(nums) {
 };
 // console.log(missingNumber([3,0,1]));
 
+/*
+find biggest area , length x width
+line width doesn't matter, sides of array dont matter
+line within two points doesnt matter 
+*/
+// [] or [one element] = 0
+// [1,3,2,8];    
+

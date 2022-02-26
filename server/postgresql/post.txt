@@ -1,0 +1,22 @@
+http requests to back end server to do CRUD operations
+
+HTTP - post, put, delete, get
+server - Create, Read, Update, Delete, 
+
+http instructs the database 
+
+crud only happens in db 
+restful api 
+
+npm i express pg cors 
+express - server
+cors lets diff domains talk to each other 
+pg = connect db to server to run postgresql queries 
+
+down load or open postgresql app 
+in terminal sign into it in terminal
+psql -U postgres 
+
+connect posgres db and server. 
+
+build routes with postgres queries 
