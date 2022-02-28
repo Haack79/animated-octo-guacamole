@@ -72,3 +72,18 @@ line within two points doesnt matter
 // [] or [one element] = 0
 // [1,3,2,8];    
 
+const findArea = (arr) => {
+    let maxArea = 0;  
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i+1; j<arr.length; j++) {
+            let shortest = arr[i] < arr[j] ? arr[i] : arr[j];
+            let length = i - j;
+            let area = shortest * length;
+            if (area > maxArea) {
+                maxArea = area; 
+            }
+        }
+    }
+    return maxArea;
+}
+findArea([7,1,2,3,9]);
