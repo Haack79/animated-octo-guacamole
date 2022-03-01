@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
 
-const App = () => {
+const AppPostgres = () => {
     return (
         <Fragment>
             
         </Fragment>
     )
 }
+
+export default AppPostgres;
