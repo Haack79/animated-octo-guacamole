@@ -4,18 +4,20 @@ const InputTodo = () => {
 
     const [description, setDescription] = useState(""); 
 
-    const onSubmitForm = async(e) => {
+    const onSubmitForm = async (e) => {
         e.preventDefault(); 
         try {
+            console.log('in da try catch'); 
             const body = {description}; 
             const response = await fetch('http://localhost:5001/todos', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
+                timeout: 5000,
                 body: JSON.stringify(body)
             });
-            console.log(response);
+            window.location = "/";
         } catch (err) {
             console.error(err.message); 
         }
@@ -24,7 +26,10 @@ const InputTodo = () => {
         <Fragment>
             <h1 className='title'>Pern Todo List</h1>
             <form onSubmit={onSubmitForm}>
-                <input type="text" value={description} onChange={e => setDescription(e.target.value)}/>
+                <input 
+                    type="text" 
+                    value={description} 
+                    onChange={e => setDescription(e.target.value)}/>
                 <button>Add</button>
             </form>
         </Fragment>
