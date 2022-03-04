@@ -9,7 +9,7 @@ const InputTodo = () => {
         try {
             console.log('in da try catch'); 
             const body = {description}; 
-            const response = await fetch('http://localhost:5001/todos', {
+            await fetch('http://localhost:5001/todos', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
