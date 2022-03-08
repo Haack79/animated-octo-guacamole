@@ -17,7 +17,7 @@ const InputTodo = () => {
                 timeout: 5000,
                 body: JSON.stringify(body)
             });
-            window.location = "/";
+            window.reload = "/";
         } catch (err) {
             console.error(err.message); 
         }

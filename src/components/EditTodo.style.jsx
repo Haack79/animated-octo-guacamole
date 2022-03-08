@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 /* The Modal (background) */
 export const EditTodoModalDiv = styled.div`
-  display: none;
+  display: ${props => props.open? 'block': 'none'};
   position: fixed;
   z-index: 1;
   padding-top: 100px;
@@ -25,7 +25,7 @@ export const EditModalContent = styled.div`
 `
 
 /* The Close Button */
-export const EditSpan = styled.span`
+export const EditButton = styled.button`
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -35,5 +35,5 @@ export const EditSpan = styled.span`
             color: #000;
             text-decoration: none;
             cursor: pointer;
-}
+        }
 `

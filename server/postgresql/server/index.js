@@ -3,8 +3,10 @@ const cors = require('cors');
 const pool = require('./db');
 const app = express();
 // middleware 
+const bodyParser = require('body-parser');
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 // routes
 
@@ -39,17 +41,19 @@ app.get('/todos/:id', async(req,res) => {
 });
 //update todo
 app.put('/todos/:id', async(req, res) => {
+    console.log(req.params.target);
+    console.log('in put req', req.body);
     try {
         const {id} = req.params;
         const {description} = req.body;
-        const updateTodo = await pool.query('UPDATE todo SET descriptiong = $1 WHERE todo_id = $2', [description, id]);
-        res.json("Tod was updated"); 
+        const updateTodo = await pool.query('UPDATE todo SET description = $1 WHERE todo_id = $2', [description, id]);
+        res.json(updateTodo); 
     } catch (err) {
         console.log(err.message);
     }
 })
 // delete a todo
-app.delete('/todo/:id', async(req, res) => {
+app.delete('/todos/:id', async(req, res) => {
     try {
         const {id} = req.params;
         const deleteTodo = await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
