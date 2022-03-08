@@ -10,12 +10,14 @@ const EditTodo = ({todo}) => {
         try {
             const body = {description};
             console.log(JSON.stringify(body)); 
-            const response = await fetch(`http://localhost:5001/todos/${todo.todo_id}`, {
+            const response = await fetch(`http://localhost:5001/todos/${todo.todo_id} `, {
                 method: "PUT",
+                mode:'cors',
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                port: 5432
             });
             console.log(response); 
         } catch (err) {
