@@ -9,7 +9,7 @@ const EditTodo = ({todo}) => {
         e.preventDefault(); 
         try {
             const body = {description};
-            console.log(JSON.stringify(body)); 
+            // console.log(JSON.stringify(body)); 
             const response = await fetch(`http://localhost:5001/todos/${todo.todo_id} `, {
                 method: "PUT",
                 mode:'cors',
@@ -19,6 +19,7 @@ const EditTodo = ({todo}) => {
                 body: JSON.stringify(body),
                 port: 5432
             });
+            window.location = "/";
             console.log(response); 
         } catch (err) {
             console.error(err.message);
@@ -42,6 +43,7 @@ const EditTodo = ({todo}) => {
                             onChange={e => setDescription(e.target.value)}
                         />
                         <EditButton onClick={() => {
+                            setDescription(todo.description);
                             openCloseOnClick(false);
                         }}
                         >

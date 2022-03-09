@@ -14,10 +14,9 @@ const InputTodo = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                timeout: 5000,
                 body: JSON.stringify(body)
             });
-            window.reload = "/";
+            window.location = "/";
         } catch (err) {
             console.error(err.message); 
         }
