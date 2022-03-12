@@ -4,6 +4,7 @@
 const Db = require('mongodb/lib/db');
 // const ObjectID = mongodb.ObjectID
 const {MongoClient, ObjectID } = require('mongodb');
+// mongoose - odm object document model helps 
 // need mongoclient to connect to the datbase to perform crud operations
 // const MongoClient = mongodb.MongoClient;
 // const id = new ObjectID(); 
@@ -19,6 +20,26 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
         return console.log('unable to connect to db');
     };
     const db = client.db(databaseName);
+    // UPDATING
+    const updatePromise = db.collection('users').updateOne({
+        _id: new ObjectID('someiadffa')
+    }, {
+        $set: {
+            name: 'newname'
+        }
+    })
+    updatePromise.then((result) => {
+        console.log(result); 
+    }).catch((error) => {
+        console.log(error);
+    })
+    db.collection('users').deleteMany({
+        age: 27
+    }).then((result) => {
+        console.log(result);
+    }).catch((error) => {
+        console.log(error); 
+    })
     // db.collection('users').insertOne({
     //     _id: id,
     //     name: 'Brian',
@@ -63,4 +84,14 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //     console.log(res.ops); 
     // });
     // db.getCollection('tasks').find({}); 
+    // FETCHING 
+    db.collection('users').findOne({_id: new ObjectID("asdfei53522l235asd")}, (err, user) => {
+        if (err) {
+            return console.error('no get name');
+        }
+        console.log(user);
+    })
+    db.collection('users').find({age: 27}).toArray((err, users) => {
+
+    })
 });
