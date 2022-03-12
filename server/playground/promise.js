@@ -25,3 +25,4 @@ doWorkPromise.then((result) => {
     console.error('error', error); 
 });
 
+//promise is pending until resolved or rejected is called
