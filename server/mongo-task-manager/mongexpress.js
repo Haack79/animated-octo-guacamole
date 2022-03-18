@@ -29,7 +29,30 @@ app.post('/tasks', async (req, res) => {
         res.status(400).send(err); 
     }
 })
-
+app.delete('/users/:id', async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const user = await User.findByIdAndUpdate(_id);
+        if (!user) {
+            return res.status(404).send();
+        }
+        res.send(user);
+    } catch (err) {
+        res.status(500).send();
+    }
+});
+app.delete('/tasks/:id', async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const task = Task.findByIdAndDelete(_id);
+        if (!task) {
+            res.status(404).send();
+        }
+        res.send(task); 
+    } catch (err) {
+        res.status(500).send();
+    }
+})
 app.get('/users', async(req, res) => {
     try {
         const users = await User.find({});
@@ -117,6 +140,25 @@ app.patch('/users/:id', async (req, res) => {
 
     } catch (err) {
         // could be validation or server related issue in this catch
+        res.status(400).send(err); 
+    }
+});
+
+app.patch('/tasks/:id', async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['description', 'completed'];
+    const isValidTaskUpdate = updates.every((update) => allowedUpdates.includes(update));
+    if (!isValidTaskUpdate) {
+        return res.status(400).send({error: 'bad update dood'});
+    }
+    const _id = req.params.id; 
+    try {
+        const task = await Task.findByIdAndUpdate(_id, req.body, {new: true, runValidators: true});
+        if (!task) {
+            return res.status(400).send();
+        }
+        res.send(task); 
+    } catch (err) {
         res.status(400).send(err); 
     }
 })
