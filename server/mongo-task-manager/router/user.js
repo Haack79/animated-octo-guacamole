@@ -42,8 +42,13 @@ router.patch('/users/:id', async (req, res) => {
         return res.status(400).send({error: 'Invalid updates'})
     }
     const _id = req.params.id;
-    try {
-        const user = await User.findByIdAndUpdate(_id, req.body, {new: true, runValidators: true});
+    try { // set user and updates to work with middleware in models/user 
+        const user = await User.findById(_id);
+        updates.forEach((update) => user[update] = req.body[update]); 
+            // use bracket notation cause don't know what the value of the update variable will be. 
+         await user.save();   
+
+        // const user = await User.findByIdAndUpdate(_id, req.body, {new: true, runValidators: true});
         if (!user) {
             return res.status(404).send();
         }

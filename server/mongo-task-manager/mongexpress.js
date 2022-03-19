@@ -10,6 +10,10 @@ app.use(express.json());// this auto parses incoming object
 
 app.use(userRouter); 
 app.use(taskRouter)
+
+app.listen(port, () => {
+    console.log('server is up on port'+port); 
+});
 /*below moving to its own router files 
 // app.post('/users', (req, res) => {
 //     const user = new User(req.body)
@@ -169,6 +173,4 @@ app.patch('/tasks/:id', async (req, res) => {
     }
 });
 */
-app.listen(port, () => {
-    console.log('server is up on port'+port); 
-});
+
