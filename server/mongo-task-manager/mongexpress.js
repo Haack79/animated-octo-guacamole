@@ -1,18 +1,24 @@
 const express = require('express');
+const userRouter = require('./models/user');
+const taskRouter = require('./models/task'); 
 require('./db/mongoose'); // mongoose lets you structure your data in a nice way. 
-const User = require('./models/user'); 
-const Task = require('./models/task'); 
+// const User = require('./models/user'); 
+// const Task = require('./models/task'); 
 const app = express();
 const port = process.env.PORT || 3000
 app.use(express.json());// this auto parses incoming object 
-app.post('/users', (req, res) => {
-    const user = new User(req.body)
-    user.save().then(() => {
-        res.status(201).send(user); // send user back to front end
-    }).catch((error) => {
-        res.status(400).send(error); 
-    })
-})
+
+app.use(userRouter); 
+app.use(taskRouter)
+/*below moving to its own router files 
+// app.post('/users', (req, res) => {
+//     const user = new User(req.body)
+//     user.save().then(() => {
+//         res.status(201).send(user); // send user back to front end
+//     }).catch((error) => {
+//         res.status(400).send(error); 
+//     })
+// })
 
 app.post('/tasks', async (req, res) => {
     // const task = new Task(req.body)
@@ -161,7 +167,8 @@ app.patch('/tasks/:id', async (req, res) => {
     } catch (err) {
         res.status(400).send(err); 
     }
-})
+});
+*/
 app.listen(port, () => {
     console.log('server is up on port'+port); 
 });
