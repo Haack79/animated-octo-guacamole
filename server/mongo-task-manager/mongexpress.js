@@ -14,6 +14,23 @@ app.use(taskRouter)
 app.listen(port, () => {
     console.log('server is up on port'+port); 
 });
+// const jwt = require('jsonwebtoken');
+// //base64decode.org
+// const myFunction = async () => {
+//     const token = jwt.sign({_id: 'ab123'}, 'thisisthetokenhelper', {expiresIn: '1 day})
+//     console.log(token); 
+//     const data = jwt.verify(token, 'thisisthetokenhelper');
+//     console.log(data);
+// };
+// myFunction();
+// const bcypt = require('bcryptjs');
+// const myFunc = async () => {
+//     const password = '1234';
+//     const hashedPassword = await bcrypt.hash(password, 8); 
+
+//     const isMatch = await bcrypt.compare('1234', hashedPassword); 
+
+// }
 /*below moving to its own router files 
 // app.post('/users', (req, res) => {
 //     const user = new User(req.body)
