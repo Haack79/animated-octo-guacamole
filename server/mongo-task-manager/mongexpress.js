@@ -6,10 +6,20 @@ require('./db/mongoose'); // mongoose lets you structure your data in a nice way
 // const Task = require('./models/task'); 
 const app = express();
 const port = process.env.PORT || 3000
+// middleware goes before rest of .use and pass own function to it. 
+app.use((req, res, next) => {
+    if (req.method === 'GET') {
+        res.send('get req disabled');
+    } else {
+        next() // lets middleware know its done and move on to other requests. 
+    }
+})
 app.use(express.json());// this auto parses incoming object 
 
 app.use(userRouter); 
 app.use(taskRouter)
+// without middleware request comes in and instantly runs route handler
+// with middleware new request has it do something, and then run route handler
 
 app.listen(port, () => {
     console.log('server is up on port'+port); 
