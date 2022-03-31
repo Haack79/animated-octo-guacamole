@@ -87,3 +87,26 @@ const findArea = (arr) => {
     return maxArea;
 }
 findArea([7,1,2,3,9]);
+// for find area cant do anything to separate loops cause need data from both to do calculations to compare. 
+// so use shifting pointers or 2 pointer system
+var maxArea = function(height) {
+    let maxArea = 0, p1 = 0, p2 = height.length -1; 
+    while (p1 < p2) {
+        let lowerOne = Math.min(height[p1], height[p2]);
+        let area = lowerOne * (p2-p1); 
+        maxArea = Math.max(maxArea, area); 
+        if (height[p1] <= height[p2]) {
+            p1++
+        } else {
+            p2--
+        }
+    }
+    return maxArea; 
+};
+// trapping rain water 
+const getTrappedWater = (arrHeights) => {
+    let maxWater = 0; 
+    for (let i = 0; i > arrHeights.length; i++) {
+
+    }
+}
