@@ -1,4 +1,6 @@
 /*
+Linear data structures - Array, linked lists, STacks, Queues 
+Non-linear - trees binary tree, graphs 
 Arrays ---- (size is fixed ) must specify array size - in many languages - specify memory
 Linked Lists-can grow not continguous not in order has element we want to store plus a pointer to the subsequent element in list
 but price paid is random access - to access must traverse entire list until you get the element. 9 from node to node 
@@ -26,6 +28,7 @@ but still improvement
 -- uses only very fast operaitons - use simple quick operations to minimize run time
 
 //========================================
+Runtime analysis allows us to measure how efficient code is. Runtime anlaysis is generally done using Big-O notation, which represents how fast code will run in the worst case.
 Big O Notation  (Analyze performance) Big O, you must be able to derive the complexity without actually coding an algo.
 - system to determine how efficient code is in measuring the amount of computations code takes. 
 - Faster & less memory use 
@@ -41,6 +44,12 @@ get rid of the constants - imagine it into infinity what will it look like.
 2. variable assignment is constant
 3. accessing elmeent in array (indx) or object (key) is constant
 4. in a loop, complexity is the length of the loop times the complexity of whatever happens inside of the loop
+--
+1. diff steps get added O(a+b) 
+2.Drop constants  
+    When we drop the constant coefficients and the less significant terms, we use asymptotic notation.
+3. diff inputs means diff variables not O(n^2) but O(a*b) for 2 diff arrays
+4. drop non-dominate terms - 
 worst -> best
 O(n^2) -> O(nlogn) -> O(n) -> O(logn) -> O(1)
 SPACE COMPLEXITY - auxiliary space complexity - in the algo
@@ -73,12 +82,89 @@ hash function to store the data - hash code to store value
 use put and get to insert data and retrieve it 
 ======================
 Patterns - Frequency counter, Multiple pointers, sliding window, divide and conquer, 
-dynamic pgroamming, greedy algorithms, backtracking 
+greedy algorithms, backtracking, 
+====
+Recursive and Dynamic 
+Dynmic - break large problem into smaller problem. 
+Recursive algorithms involve a function calling itself in order to solve a smaller version of a problem. 
+    Similarly, dynamic programing algorithms break down problems into subproblems in order to solve a larger problem. 
+    Although the two concepts aren't exactly the same, dynamic programming solutions are often implemented recursively.
+recursion - ex. factorial(n) = n*factorial(n-1); factorial(1) = 1.
+fact(3) = 3 * 2 * 1 = 6/ recursive stack or iteraviley 
+factorial (n) {
+    if (n==1) return 1; 
+    return  n * factorial(n-1); 
+}
+this causes big run times and takes up lots of space so use memoization to help 
+with it can be O(n) time
+call stack memory - O(n); space complexity
+use grid[row][column] instead of grid [y][x] cause many mistakenly due grid[x][y]
+DYNAMIC PROGRAMMING (DP)
+What do we conclude from this? We need to break up a problem into a series of overlapping sub-problems,
+ and build up solutions to larger and larger sub-problems. If you are given a problem, which can be broken down 
+ into smaller sub-problems, and these smaller sub-problems can still be broken into smaller ones - and if you manage 
+ to find out that there are some over-lappping sub-problems, then you've encountered a DP problem.
+ -famous ones unix diff, bellman ford , tex, wasp
+ Bellman-Ford - an algorithm that computes shortest paths from a single source vertex to all of the other vertices in a
+ ghted digraph.[1] It is slower than Dijkstra's algorithm for the same problem, but more versatile, as it is capable of 
+ handling graphs in which some of the edge weights are negative numbers. 
+ In programming, Dynamic Programming is a powerful technique that allows one to solve different types of problems in 
+ time O(n^2) or O(n^3) for which a naive approach would take exponential time.
+ Writes down "1+1+1+1+1+1+1+1 =" on a sheet of paper.
+"What's that equal to?"
+Counting "Eight!"
+Writes down another "1+" on the left.
+"What about that?"
+"Nine!" " How'd you know it was nine so fast?"
+"You just added one more!"
+"So you didn't need to recount because you remembered there were eight! Dynamic Programming is just a fancy way to say
+ remembering stuff to save time later!"
+ Dynamic programming is basically, recursion plus using common sense. What it means is that recursion allows you to 
+ express the value of a function in terms of other values of that function. Where the common sense tells you that if 
+ you implement your function in a way that the recursive calls are done in advance, and stored for easy access, 
+ it will make your program faster. This is what we call Memoization - it is memorizing the results of some specific 
+    states, which can then be later accessed to solve other sub-problems.
+The intuition behind dynamic programming is that we trade space for time, i.e. to say that instead of calculating all
+ the states taking a lot of time but no space, we take up space to store the results of all the sub-problems to save
+  time later.
+  A code for it using pure recursion:
+
+  int fib (int n) {
+        if (n < 2)
+            return 1;
+        return fib(n-1) + fib(n-2);
+    }
+Using Dynamic Programming approach with memoization:
+
+ void fib () {
+        fibresult[0] = 1;
+        fibresult[1] = 1;
+        for (int i = 2; i<n; i++)
+           fibresult[i] = fibresult[i-1] + fibresult[i-2];
+    }
+    DP--2 types
+    1. Optimization problems.
+2. Combinatorial problems.
+One can think of dynamic programming as a table-filling algorithm: you know the calculations you have to do, so you pick 
+the best order to do them in and ignore the ones you don't have to fill in.
+Write a backtrack.
+
+When coming up with the memoization solution for a problem, start with a backtrack solution that finds the correct answer. 
+Backtrack solution enumerates all the valid answers for the problem and chooses the best one.
+
+Here are some restrictions on the backtrack solution:
+
+It should be a function, calculating the answer using recursion.
+It should return the answer with return statement, i.e., not store it somewhere.
+All the non-local variables that the function uses should be used as read-only, i.e. the function can modify only local variables and its arguments.
 ============================================
 Object Oriented Design/Systems Design
 Algorithms: Breadth First Search/Depth First Search, Binary Search, Merge Sort and Quicksort
 Problem Analysis Methods
-Brute Force
+Brute Force - try every single path on a graph to find the shortest path to get to point a to z 
+trying every permuation, every edge and vertice  - O(n!); very bad. 
+number of nodes * 1 less * 1 less so on and so forth
+
 ==========================(indexOf loops through the array) // arr2.splice(correctIndx, 1) ->remove it 
 frequency counter - uses objects or sets to collect values / frequencies  of values -helps avoid nested loops
 function same(arr1, arr2) {
@@ -98,16 +184,16 @@ multiple pointer - 2 pointers usually start at ends or middle and move in diff d
 ===============================
 Divide and Conquer
 ================================
-Recursion
+Recursion = roughly O(2^n); 
 Dynamic Programming
-Greedy Algorithms
+Greedy Algorithms - This means that a greedy algorithm picks the best immediate choice and never reconsiders its choices. In terms of optimizing a solution, this simply means that the greedy solution will try and find local optimum solutions - which can be many - and might miss out on a global optimum solution.
 All Topics to cover
 (You'll need to to talk about how they're implemented and why you'd choose one implementation or data structure instead of another.)
 
 General Topics
-Recursion
+
 Iterative Algorithm
-Dynamic Programming
+
 Pointers in C++
 Array, ArrayList, Dynamic Arrays, 2D Arrays, Vectors
 
@@ -138,7 +224,8 @@ Disadvantages - can take up more memory then an array cause address store
 Cycle Detection in Linked-List
 Stack and Queues
 ================================
-TREES - binary search tree, balanced - insert and find are O(log n) and unbalanced both are O(n); 
+Trees will always have n-1 edges with n nodes 
+TREES - (heirarchal) binary search tree, balanced - insert and find are O(log n) and unbalanced both are O(n); 
 Trees Trees are a common non-linear data structure. They don’t store data in a linear way, but instead organize hierarchically. A tree is normally 
 represented by nodes which contain a value and point to other nodes. - like files and folders
 Often called HIERARCHICAL DATA STRUCTURE 
@@ -151,6 +238,14 @@ Often used in cs to represent state such as tic tac toe cause one move can lead 
 Binary Tree 
     tree where nodes can only have 2 children 
     leaf node is node with no children 
+=======
+searches - about relationships - string difference, they are ways of searchingj
+DFS - a stack either our own or the call stack via recursion - LIFO - uses: backtracking, complete search, exhuasting path
+it goes deep. 
+BFS - w/ a queue - (FIFO) uses- check if a path exists between nodes, finding "hops" or distance out of 'levels" 
+away. goes wide. 
+so in a graph breadth first goes wide and circles outward, while dfs will go deep 
+O(v+e) time and O(v) space. 
 Breadth First Search - look at each node at each level, across whole wide expanse.
     To implement a BFS algorithm, we use the queue data structure to help.
     First add the root node into the queue with the put method.
@@ -158,7 +253,7 @@ Breadth First Search - look at each node at each level, across whole wide expans
     Get the first node in the queue, and then print its value.
     Add both left and right children into the queue (if the current nodehas children).
     Done. We will print the value of each node, level by level, with our queuehelper.
-Depth First Search - look at all the nodes of a descendant before moving n 
+Depth First Search - a Stack - look at all the nodes of a descendant before moving n 
     DFS explores a path all the way to a leaf before backtracking and exploring another path. 
     Let’s take a look at an example with this type of traversal.
     When we go deep to the leaf and backtrack, this is called DFS algorithm.
@@ -171,7 +266,8 @@ Depth First Search - look at all the nodes of a descendant before moving n
     POSTORDER - left then right then root - ACB 
 Binary Search Tree ------
     Binary Search Tree A Binary Search Tree is sometimes called ordered or sorted binary trees, and it keeps 
-    its values in sorted order, so that lookup and other operations can use the principle of binary search
+    its values in sorted order, so that lookup and other operations can use the principle of binary search, 
+    binary search is divide and conquer. 
 Binary Search Tree  (BST) is an extension of Binary tree with some added constraints. 
     In BST, the value of the left child of a node must be smaller than or equal to the value 
     of its parent and the value of the right child is always larger than or equal to the value of its parent.
@@ -256,14 +352,60 @@ A heap is a tree-based data structure that usually comes in two varieties:
 Binary heaps are super efficient for implementing priority queues because it’s very easy to know and retrieve/remove the element with the highest priority: it will always be the root node!
 ======================
 Graphs - Graphs are a non-linear data structure considering of nodes and edges (which connect pairs of nodes). Graphs are used to solve many real-life problems and are often used to represent networks (e.g. friends on a social network).
+    set of nodes connected by edges, 
+    no rules like in a tree, 
+    like discreet mathematics
+    a graph G is an ordered pair of a set V of vertices and a set E of edges.
+    G = (V,E); =>  Ordered pair
+    (a,b) !== (b,a) if a !== b
+    unordered pair - {a,b} - important not important - a,b === b,a
+    edge is defined by its two end points(vertices) 
+    directed edge - point with origin and destination
+    (u) -> (v) (u,v) 
+    unidrected - is unordered {u,v} no fixed direction 
+    a graph with all directed is a directed graph or Digraph
+    all undirected edges is just undirected graph
+    social network is undirected - can suggest friends of friends - no true direciton so goes both ways.
+    Based on friends connections in a graph you can see who may be a suggestion
+    Find all nodes with shortest paths to a node
+    www - a directed graph - web page links to another page , could be one direction cause web page may not ink back to that page.
+    like my website links to wiki but wiki doesn't link to my page.
+    web crawling - systematically browse web and stores data on it
+    web crawling is graph traversal - visiting all nodes 
+Weighted graph and unweighted graph
+some connections can have more weight, value, - intra city network with one way streets is digraph
+but inter city - city to city is 2 way streets so undirected graph
+label edges with weights - give them values for their length - 
+Unweighted graph is weighted graph but all weight of edges are the same. 
+social network is unweighted , undirected graph
+world wide web was unweighted, directed graph 
+intercity is weighted undirected graph 
 
 Shortest path on unweighted Graph
+
 
 Paths
 All pairs shortest path
 Single Source Shortest path
-Dijkstra
-A*
+Dijkstra -number of the nodes squared N^2- It is a greedy algorithm that finds the shortest path from a starting node to all other nodes in a
+ graph. It uses a priority queue to keep track of the nodes that have been visited and the shortest distance to them. 
+ It is not guaranteed to find the shortest path if there are multiple shortest paths.
+ Algorithm 
+1) Create a set sptSet (shortest path tree set) that keeps track of vertices included in the shortest-path tree, i.e., whose minimum distance from the source is calculated and finalized. Initially, this set is empty. 
+2) Assign a distance value to all vertices in the input graph. Initialize all distance values as INFINITE. Assign distance value as 0 for the source vertex so that it is picked first. 
+3) While sptSet doesn’t include all vertices 
+….a) Pick a vertex u which is not there in sptSet and has a minimum distance value. 
+….b) Include u to sptSet. 
+….c) Update distance value of all adjacent vertices of u. To update the distance values, iterate through all adjacent vertices. For every adjacent vertex v, if the sum of distance value of u (from source) and weight of edge u-v, is less than the distance value of v, then update the distance value of v. 
+improved few years later O(n log n+l);
+
+A* - a path finding algorithm used to find path between two points usually in a graph. 
+such as growth between cities, tic tac toe , find shortest path to your classroom, 
+could go every path but that takes long time - a tries most promising path first. 
+need to compare 2 positions in graph and see which is better, - try heuristic 
+A* system uses 2 lists - open and closed lists, closed is all nodes explored, open list are nodes left to visit.
+keeping track of them you can find best path to your point to get to. 
+
 Bellman Ford
 Bit Manipulation
 Regular Expressions
@@ -278,16 +420,25 @@ Threads
 Deadlocks
 
 General Sorting and Searching
-Sorting:
-Bubble Sort
+Sorting: Searching algorithms are used to Sorting algorithms are used to rearrange a list of elements so that they're 
+in a speciified order (e.g. sorting numbers to go from highest to lowest).
+
+Bubble Sort 
 Quick Sort
-Merge Sort
+Merge Sort - splits array into 2 halves so on and so forth until all elements are 1 array.
+then compares first 2 arrays puts smaller num first and the bigger second, merges these two arrays
+then compare the next two so on and so forth,
+keep comparing 2 arrays - merging them until one big array. O(n log n) - n is times we need to compare an dmerge items
+which is directly proportional to the number of items in array, log n comes from number of merge steps. 
+better than selection sort. 
 Radix Sort
 Heap Sort
 Insert Sort
+Selection sort - one by one organize from smallest to largest- n^2
 Search :
-Binary Search - depends on random access - 
-You must know and discuss tradeoff of using them on different type of input data
+Binary Search - O(log n) depends on random access - 
+needs to be ordered 
+
 
 Time Complexity of Sorts
 Insert Sort -> O(n^2) [Insert into a new array at sorted position] [Better than selection sort]

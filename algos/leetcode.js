@@ -110,3 +110,117 @@ const getTrappedWater = (arrHeights) => {
 
     }
 }
+
+
+
+// Fibonacci and memoization - set of numbers that spiral out  0,1,1,2,3,5,8,etc so ad the 2 previous 
+// memoization is caching numbers that we already calculated to make the algo more performant
+// this memoization will make it O(n) instead of O(n^2); 
+// --- recursive O(2^n) not very performant. 
+function fib(indx) {
+    if (indx < 3) return 1; 
+    return fib(indx-1) + fib(indx -2); 
+};
+// performant with memoization O(n); 
+function fibMem(indx, cache) {
+    cache = cache || [];
+    if (cache[indx]) return cache[indx];
+    if (indx < 3) return 1;
+    cache[indx] = fibMem(indx - 1, cache) + fibMem(indx -2, cache); 
+    return cache[indx]; 
+}
+// leet code fib w/ memoization 
+var climbStairs = function(n,memo) {
+    memo = memo || [];
+    if (memo[n]) return memo[n];    
+    if (n <=3) return n; 
+    memo[n] = climbStairs(n-1,memo) + climbStairs(n-2,memo);
+    return memo[n]; 
+};
+// dynamic programming solution
+/*
+DP
+
+dp[i] represents the total number of different ways to take i steps
+So, we want to get dp[n].
+dp[n] = dp[n-1] + dp[n-2] because we can either take 1 or 2 steps.
+
+We have two base cases: dp[1] = 1 and dp[2] = 2 because
+there is one way to take 1 step and there are two ways to take 2 steps (1 step + 1 step OR 2 step)
+*/
+var climbStairs = function(n) {
+    let dp = new Array(n + 1);
+    dp[1] = 1, dp[2] = 2;
+    for (let i = 3; i <= n; i++) {
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+    return dp[n];
+    // T.C: O(N)
+    // S.C: O(N)
+};
+var climbStairs = function(n) {
+    //if(n<=1) return 1
+    let pre = 1
+    let cur  = 1
+    while(n >= 2){
+        let temp = cur
+        cur += pre 
+        pre = temp
+        n--
+    }
+    return cur
+}
+//reverse string
+var reverseString = function(s) {
+    var mid = Math.floor(s/2);
+    var p1 = 0; 
+    for (var i = s.length-1; i>mid; i--){
+        var firstVal = s[p1];
+        s[p1] = s[i];
+        s[i] = firstVal;
+        p1++
+    }
+    return s; 
+};
+// console.log(reverseString(['h','e','l','l','o']));
+
+// sliding window pattern - create a window that can either be an array or number from one position to another 
+// condition causes window to increase or close and new window created, good for finding subset of data in array or string
+// good for finding length of string with unique characters in that string
+// good for maxSubArraySum where array of integers and number n , should calc max sum of n  consecutive elements. 
+// [1,2,5,2,8,1,5], 2 => 10; [1,2,5,2,8,1,5], 4 => 17
+
+// Naive way 
+function maxSubArraySum(arr, num) {
+    if (num > arr.length) {
+        return null;
+    }
+    var max = -Infinity;
+    for (let i = 0; i < arr.length - num +1; i++) {
+        let tempAdd = 0; 
+        for (let j = 0; j < num; j++) {
+            temp += arr[i + j];
+        }
+        max = temp > max ? temp : max; 
+    }
+    return max
+};
+// now O(n) 
+function maxSubArraySum(arr, num) {
+    let maxSum = 0;
+    let tempSum = 0;
+    if (arr.length < num) return null;
+    for (let i = 0; i < num; i++ ) {
+        maxSum += arr[i];
+    }
+    tempSum = maxSum;
+    for (let i = num; i < arr.length; i++) {
+        // add next array item and subtract the first array item. 
+        tempSum = tempSum - arr[i-num] + arr[i];
+        maxSum = Math.max(maxSum, tempSum);
+    }
+    return maxSum; 
+}
+// DIVIDE AND CONQUER - Pattern involves dividing data into smaller chunks and then repeating process with subset of data
+// sounds like dynamic programming,  decrease time complexity
+// binary search is divide and conquer. 
