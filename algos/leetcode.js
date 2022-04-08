@@ -224,3 +224,83 @@ function maxSubArraySum(arr, num) {
 // DIVIDE AND CONQUER - Pattern involves dividing data into smaller chunks and then repeating process with subset of data
 // sounds like dynamic programming,  decrease time complexity
 // binary search is divide and conquer. 
+// naive
+function search(arr, val) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === val) {
+            return arr[i];
+        }
+    }
+    return -1; 
+}
+// Binary search approach  [1,3,5,10,23,88,99,100,122,123,155,203],122
+// O(log n); 
+function binarySearch (arr, val) {
+    let min = 0;
+    let max = arr.length -1; 
+    while (min <= max) {
+        let middle = Math.floor((min + max) / 2); 
+        let currElem = arr[middle];
+        if (arr[middle] < val) {
+            min = middle + 1;
+        } else if (arr[middle] > val) {
+            max = middle - 1; 
+        } else {
+            return middle; 
+        }
+    }
+    return -1; 
+}
+// frequency counter 
+function sameFrequency(num1, num2){
+    // good luck. Add any arguments you deem necessary. 
+  let firstObj = {}; 
+  let first = num1.toString().split(''); 
+  let second = num2.toString().split(''); 
+  if (first.length !== second.length) {
+    return false; 
+  }
+  for (let i = 0; i < first.length; i++) {
+      firstObj[first[i]] ? firstObj[first[i]]++ : firstObj[first[i]] = 1; 
+  }
+  for (let i = 0; i < second.length; i++) {
+    if (!firstObj[second[i]]) {
+      return false; if 
+      firstObj[second[i]]--;
+      if (firstObj[second[i]] < 0) {
+        return false; 
+      }
+    }
+  }
+  return true; 
+}
+// areThereDuplicates Solution (Frequency Counter)
+function areThereDuplicates() {
+  let collection = {}
+  for(let val in arguments){
+    collection[arguments[val]] = (collection[arguments[val]] || 0) + 1
+  }
+  for(let key in collection){
+    if(collection[key] > 1) return true
+  }
+  return false;
+}
+// areThereDuplicates Solution (Multiple Pointers)
+function areThereDuplicates(...args) {
+  // Two pointers
+  args.sort((a,b) => a > b);
+  let start = 0;
+  let next = 1;
+  while(next < args.length){
+    if(args[start] === args[next]){
+        return true
+    }
+    start++
+    next++
+  }
+  return false
+}
+// areThereDuplicates One Liner Solution
+function areThereDuplicates() {
+  return new Set(arguments).size !== arguments.length;
+}

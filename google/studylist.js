@@ -436,7 +436,7 @@ Heap Sort
 Insert Sort
 Selection sort - one by one organize from smallest to largest- n^2
 Search :
-Binary Search - O(log n) depends on random access - 
+Binary Search - O(log n) depends on random access - It is a divide and conquer, often used for binary tree searches.
 needs to be ordered 
 
 
