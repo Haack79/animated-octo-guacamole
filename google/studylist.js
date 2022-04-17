@@ -5,7 +5,7 @@ Arrays ---- (size is fixed ) must specify array size - in many languages - speci
 Linked Lists-can grow not continguous not in order has element we want to store plus a pointer to the subsequent element in list
 but price paid is random access - to access must traverse entire list until you get the element. 9 from node to node 
 look up is O(n) - 
-HASH TABLES==> - used when speedy insertion, deletion, and lookup elements is priority - constant time 
+HASH TABLES ==> - used when speedy insertion, deletion, and lookup elements is priority - constant time 
 hash table is array with a hash function - hash function takes piece of data as input and outputs integer (hash value);
 hash value function takes key - puts out hash vaulue- value maps key to index in the table - 
 use hash function where to store a given key, and use it to see where to search for a key - must be consistent
@@ -99,6 +99,19 @@ this causes big run times and takes up lots of space so use memoization to help
 with it can be O(n) time
 call stack memory - O(n); space complexity
 use grid[row][column] instead of grid [y][x] cause many mistakenly due grid[x][y]
+RECURSION - a process that calls itself - JSON.parse does this, DOM traversal does it, Obj traversal, complex data graphs/ trees
+2 PARTS - base case (point to stop) and different input 
+-- RECURSION HELPER FUNCTION
+function outer(input) {
+    var outerscopedvariable =[];
+    function helper(helperInput) {
+        //modify code
+        helper(helperInput);
+    }
+    helper(input);
+    return outerscopedvariable;
+};
+
 DYNAMIC PROGRAMMING (DP)
 What do we conclude from this? We need to break up a problem into a series of overlapping sub-problems,
  and build up solutions to larger and larger sub-problems. If you are given a problem, which can be broken down 
@@ -480,3 +493,267 @@ Binary Search Tree	O(1)	O(log n)	O(log n)
 function addUpTo(n) {
     return n * (n+1) / 2;
 }; 
+// SEARCH ALGORITHMS
+// ---LINEAR SERACH ----
+/* Search an array - go from first element to last in order
+in unsorted array of elements best way is to check each item one by one.
+// methods in js - indexOf, includes, find, findIndex, 
+just a straight for loop one by one big O(n)
+*/
+// BINARY SEARCH - array must be sorted O(log n)
+// string in sub string , loop through
+ // SORTING - putting items in some type of order - common and good to know it
+ // many ways to sort and each has pros and cons - 
+ // like data almost nearly sorted, use Insertion 
+// JS - array.sort() - sorts alphabetically fine, but numbers off cause uses unicode- very bizarre,
+// specify how it should short with comparator - tell sort order based on whats returned
+function numCompareSort(num1, num2) { return num1-num2} ; [2,15,3,5,7,8].sort(numCompareSort); 
+// BUBBLE SORT  == O(n^2) - so bad. 
+// but nearly sorted array with noSwap optimization - be O(n) 
+// not very efficient - not very good, good at one thing. 
+// largest value bubbles to the top 
+
+// SELECTION SORT - O(n^2) like bubbble but places small values into position first 
+// still move frrom beginning to end. 
+
+// INSERTION SORT - divide into halves and place as you go.
+// Only do switch 
+// [1,3,5,0]; 
+function insertSort(arr) {
+    for (let i = 1; i<arr.length; i++) {
+        var currentVal = arr[i];
+        for (var j = i - 1; j>=0 && arr[j] > currentVal; j--) {
+            arr[j+1] = arr[j]; 
+        }
+        arr[j+1] = currentVal;
+        console.log(i, j, arr); 
+    }
+    return arr; 
+}
+console.log([1,3,5,0]); 
+// INSERTION SORT O(n^2); but if its almost assorted - it will be much faster - 
+// online algorithm works as data is coming in - insert data one element at a time - this is good one - works well
+// works well for data streaming in to keep it organized.
+/*
+bubble - time O(n^2) - best O(n) space O(1)
+insertion - O(n^2) best O(n) space O(1);
+selection - O(n^2) best O(n^2) space O(1);
+*/
+// better sorts - improves time from O(n^2) to O(n log n); 
+// MERGE SORT - splitting up , merging and sortingO (n log n)time and O9n0 space
+// decomposes arrays into smaller arrays - break it into sub arrays until array of 1. 
+// first merge array function cause 2 diff arrays of diff sizes = O(n+m); 
+function merge(arr1, arr2) {
+    let i = 0;
+    let j = 0; 
+    let newArr = []; 
+    while(i !== arr1.length && j !== arr2.length) {
+        if (arr1[i] > arr2[j]) {
+            newArr.push(arr2[j])
+            j++
+        } else {
+            newArr.push(arr1[i]);
+            i++; 
+        }
+    }
+    return newArr; 
+}
+// QUICK SORT - find pivot point n move nums lesser to left n bigger to the right
+// has PIVOT helper  just moves elements left or right of pivot based on size
+//does in place so does not create a new array.
+// look at functions list in other doc to see it
+// O(n^2) size O(log n); 
+// best could be O(n log n); 
+// all these have been comparison - less than vs greater than
+// bubble , insertion, selection = O(n^2) 
+// quick sort , merge sort -> O(n log n); 
+// BEST EVER HOPE FOR WITH COMPARISON SORT IS n log n
+
+// now have where we don't do direct comparison - only with integers 
+// RADIX SORT - sorting algo works on lists of numbers - 
+//never compares two elements
+// uses size of the digits. sorts based on size of digits in number 
+// starts from right and goes to the left. 
+// first helper function to get digit 
+// big O(nk) worst where n is number of nums (length of array of nums) and 
+//k is length of numbers.
+// space O(n+k);
+// if dealing with all unique data - becomes O(n log n) cause of bit's storage in computer
+// cause of how comps store digits, bits could cause it to be same as comparison sorts
+//just moving to buckets and regrouping. 
+// DATA STRUCTURES ============= 
+/*
+data structures are collection of values, the relationship among them and funcs or operations
+that can be applied to them
+many many data structures 
+so takes data and puts them in unique relationship to each other. 
+diff ds excel at diff things. 
+most likely will need to use one of these data structures. - 
+DOM is a tree
+Map for location or driving - use graph
+ordered list like array with fast insert and removals at end or beginning - linked lists
+web scraping html - tree
+write a scheduler find highest priority task - binary heap.
+
+CLASS SYNTAX 
+CLASS - blueprint for creating objects with predefined properties and methods
+instantiate new class - javascript doesn't really ahve classes - 
+class is syntactic sugar over prototype based inheritance
+
+implement tons of data structures as classes
+
+declare class
+class Student {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName; 
+        this.tardies = 0; 
+    }
+    fullName() {
+        return `yourfull name is ${this.firstName} ${this.lastName}`;
+    }
+    markLate() {
+        this.tardies += 1;
+        if (this.tardies >= 3) return "You ARE EXPELLED SUCKA!";
+        return `${this.firstName} has been late ${this.tardies} times`;
+    }
+    addScore(score) {
+        this.scores.push(score);
+        return this.scores; 
+    }
+    calculateAvg() {
+        this.scores.reduce(function(a,b) {return a+b;});
+        return sum/this.scores.length; 
+    }
+    static enrollStudents(...students){//send emails}; // this only works in Student not instances.
+}
+let firstStudent = new Student('brian', 'haack', 100);
+
+class METHODS 
+static keyword- to make a class method that can't be called through its instances
+usually like a utility function not for a single use case or single student, but all students
+instances like sending email 
+Student.enrollStudents(); // can't do this on firstStudent
+---
+class dataStructure() {
+    constructor() {
+        // default properties
+    }
+    instanceMethods() {methods to run on instances or objects created from the class}
+}
+*/
+/*
+SINGLY LINKED LISTS !! data with nodes  
+contains head, tail, and length
+has nodes, each node has value and a pointer to another node or null
+no indx, must search through the entire node to find specific value - like elephants grabbing tails
+linked list is like stairs - go stair by stair up 
+connected only one way, from head to tail 
+random access not allowed.
+-- compare, arrays have indx, insertion and deletion can be expensive, quick access at indx
+-
+Insertion O(1); Removal -depends O(1) or O(n); Searching O(n) ; access O(n);
+arr - search O(1)
+So singly linked lists are great for when its about insertion and deletion at beginning are needed
+arry has indx, but linked lists do not
+*/
+/*
+DOUBLY LINKED LIST
+like singly but nodes point in two directions. have head and tail and points 
+head poitns to null and tail does too but head has next and null and tail has prev and null
+trade off is more memory taken, but more memory = more flexibility
+
+INsertion O(1), Removal O(1) , searching O(n) or specifically O(n/2), access - O(n)
+so nicer to have it point both ways so can start on either end.
+but does use more memory.
+*/
+/*
+STACKS & QUEUES 
+STACK - abstract data structure, collects data, LIFO -LAST IN FIRST OUT PRINCIPLE
+- could implement with linked list, or array.- look at call stack
+managing function invocation, undo/redo - routing history object treated as stack. 
+graphs and trees use stack style algo's
+def more than one way to make a stack, its just concept, set of rules. 
+BIG O STACKS - INSERTION O(1), REMOVAL O(1), SEARCHING O(N) ACCESS O(N);
+
+QUEUE - abstract data structure - FIFO - first in first out.
+-Add data in and remove data out - get in line, and get through.
+-line, in games online, background tasks, download, upload, print queue, task processing
+can do with both array or queue class 
+BIG O queues - INSERTION O(1), REMOVAL O(1), SEARCHING O(N) ACCESS O(N);
+*/
+/*
+TREES -data structure that consists of nodes in a parent/child relationship
+end up with branches - branching structures that split 
+top most node is root with edges(branch) 
+comparelists - linear- but trees are non-linear - many paths to take. 
+-node can only point to a child, never point to parent
+needs to have one root , one point of entry
+leaf is node with no children
+child is node connected when moving away from root
+parent is converse of child
+siblings are nodes with same parent
+root has no parent
+edge is connection of one node to another.
+APPLICATIONS - HTML DOM - tree structure , network routing , abstract syntax trees, ai , folders in os
+
+BINARY TREES - each node can have at most 2 children. 
+Binary serach trees - stores in specific way. 
+-sorted in order - BST - store data taht can be compared. 
+- left is less than parent, and to the right are greater than parent node. 
+
+BIG O  insertion and search O(log n); 
+not gauranteed cause depends on the way binary search tree is set up - 
+could be like a linked list and be one sided search tree. 
+
+TREE TRAVERSAL - 
+for unordered need to visit each node
+Two Main Approaches - Breadth-first search : Depth-first search
+Breadth First - go across row by row
+depth first goes down a whole length of branch
+
+BREADTH FIRST SEARCH - visit all nodes level by leve
+Can use a queue - use array version and variable to store values of nodes visited.
+
+DEPTH FIRST SEARCH-traverse down until hit an end
+3 steps
+1.Pre-Order visit root node, then visit left, then visit right.
+    create var to store values
+    store root of bst in variable called current
+    write helper function to accep node
+    push value 
+    if has lef t callit.
+
+    BFS - depends on tree - space could be a lot more on a very wide tree
+    so DFS would use less space. 
+    -
+    if deep long tree then dfs could take more
+    InOrder - data comes back in order. all nodes in order. 
+    PreOrder - could be good for clone or flatten out a tree, or serialize it. 
+    could be order to reconstruct it.
+
+    BINARY HEAPS - TREES SPECIAL TREE'S WITH RULES 
+    -MAX BINARY HEAP - parent nodes are always larger than child nodes
+    -Min Binary HEAP - parent nodes are always smaller than child nodes !
+    no order, the root is the largest number in the tree.
+    each parent has 2 nodes at most
+    binary heap is compact as possible, all children of each node are as full as they can
+    bee and left children are filled out first.
+    no implied ordering
+    Min - parent is smallest - no real relatinoship 
+    -- commonly used for PRIORITY QUEU. 
+    COMMONLY used for graph traversal algos
+    -
+    bubble down, percolate down, sift down, trickledown heapify down, cascade down - extract min/max
+sink down
+when remove it bubble down after switching
+
+PRIORITY QUEUE - data structure where each element has prioarity associated with it. 
+Hospital er 
+system processes - nice value - 
+Use array/list to store all elements, iterate over entire thing to find highest          
+priority: 3 priority: 2 etc
+often lowest number is a higher priority
+heap  to do this 
+
+*/
