@@ -756,4 +756,116 @@ priority: 3 priority: 2 etc
 often lowest number is a higher priority
 heap  to do this 
 
+big 0 - binary heaps - Insertion and deletion O(log n) , search O(n) -literally O(n/2);
+
+binary heap type of heap that is type of tree
+binary heaps userful for priority queues
+either max or min binary heaps
+can represent heaps using arrays
+
+HASH TABLES - HASH MAP 
+js has a variation - 
+-   used to store key-value pairs 
+unordered key value pairs 
+they are fast for finding, adding and removing 
+python has dictionaries, js has objects & maps, jave,go,scala have maps, ruby has hashes.
+colors['cyan'];
+-- human readability and computer readability - - we will rebuild using an array.
+needs way to convert keys into valid array indecies 
+- a function that performs this is called a hash function.
+['pink':'#ff69b4', 'cyan':'#00ffff']
+    0             ,   1  -> etc
+    so key value pair at a specific index.
+
+hash function takes input and outputs a fixed size. 
+hash("hello!") -> 20934209342039482 ; <-- python
+1. needs to be fast O(1)
+2. doesnt cluster but distributes uniformly - 
+3. deterministic ( same input yields same output);
+
+takes input of any size and maps out to specific size. 
+
+collisions - 
+1. separate chaining - store diff pieces of data with diff data structure
+so in array at an index use a more sophisticated data structure like array, linked list, etc
+- store multiple key value pairs at same position
+2. Linear probing - when collision happens store info at next available spot in the array
+so can store single key value pair at each index
+
+big o - Insert deletion and access O(1); 
+
+GRAPHS - finite and possibly mutable set of vertices or node or points, together with a 
+set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs
+for a directed graph.
+nodes and connections between those nodes. 
+placement doesnt matter,just about lines to connections.
+- uses - social networking, location mapping, routing algos, visual hierarchy, file system,
+Types -
+    vertex - a node 
+    edge - connection between nodes
+    - tree is graph where only one path but graph can have diff paths
+    Undirected - no direction to the edges - 2 way connections (a) <-> (b)
+    DIREcted graph - there is direction - it goes a certain way (a) -> (b) like instagram following
+    Weighted - value to the edges, info about the connections - like map with distance nums
+    unweighted - no values or info on the edges. 
+    weighted undriected
+
+ADJACENY MATRIX - 2 DIMENSIONAL STRUCTURE USUALLY WITH ARRAYS, THINGS IN ROWS AND COLUMNS
+ADJACENCY LIST  - use array to store edges, array of arrays of connections index [1,5] so 
+vertice 0 [1,5] has connection to 5 and 1. 
+but hash table works better
+for given key A and see [b,f] to see the node and its connections.
+
+Big O
+adjacency list - add vertex,add edge O(1), remove vertex O(|v| + |e|), remove edge O(|e|), 
+query , storage O(|v| + |e|);
+adjacency matrix add vertex O(v^2), add edge O(1), remove vert O(|v^2|), removed edge O(1)
+query O(1), storage O(|v^2|);
+v = vertices, e is edges. 
+-- if sparce connections dont use matrix
+adjaceny list - can take up less space in sparse graphs, faster to iterate over all edges, slower to lookup specific edge
+matric - takes up more space in sparse graphs, slowert o iterate edges, faster to look up sepcific edge.
+
+adjaceny stores straight edges, 
+matrix stores not just edges 
+
+GRAPH TRAVERSAL - visiting every vertex in a graph, 
+there is no root
+uses - peer to peer networking, web crawlers, finding closest, 
+Shortest Path problems : gps navigation, Solving mazes, AI shortest path to win a game
+DEPTH FIRST - go as far down a branch before back tracking
+go down nighbor n keep checking for neighbors of the next neighbor
+so if nighbor go to that one nd see if it has a nighbor deeper down
+
+BREADTH FIRST - CHECKS all neighbors of the node first and then moves down , 
+- has height, visit all things of the same height. 
+
+DIJKSTRA'S ALGO -famouse algo
+- every cs class learns it at some point 
+used all the time, big tech uses their algos on top of it. 
+- FINDS SHORTEST PATH BETWEEN TWO VERTICES ON A GRAPH.
+whats fasted way to get from point A to point B
+Dijkstra - advanced computer science to academic discipline - wrote 6 of 30 most influential papers
+- made new fields in cs , many of his discoveries and aglos are still used today.
+wanted to show to public why computers are awesome and can do whats hard for humans to do.
+gps, biology - spread of virus, network routing, 
+weighted graph used
+
+DYNAMIC PROGRAMMING - LIGHT INTRO 
+must be good with recursion. 
+dp - method for solving a complex problem by breaking it down into a collection of simpler
+subproblems, solving each of those subproblems just once, and storing their solutions.
+-
+1940's richard bellman - talk of optimizing military schedules
+- 
+optimal programming 
+overlapping sub problems - only works with optimal sub structure
+subproblems are ones that can be broken down to smaller problems that can be reused several times.
+fibonacci is subproblems
+mergeSort - no overlapping subproblems, its divide and conquer
+
+Optimal substructure - path from a ->b-c->e->d - shortest path is build up of short paths
+flights from SFO to FAI , sfo -> sea -> fai 
+sfo -> pdx -> sea 
+
 */
